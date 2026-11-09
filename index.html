@@ -1,0 +1,126 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CyberShield – Cybercrime Pattern Analysis &amp; Fraud Detection</title>
+<style>
+:root{--bg:#f1f4fb;--card:#fff;--txt:#1e2540;--mut:#6b7494;--line:#dfe4f2;--pri:#2563eb;--red:#ef4444;--amb:#f59e0b;--grn:#10b981;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1330;--card:#111c44;--txt:#e8ecff;--mut:#9aa6d6;--line:#223067}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,Segoe UI,Arial,sans-serif}
+header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--card);border-bottom:1px solid var(--line);flex-wrap:wrap}
+header b{font-size:18px;margin-right:auto;color:var(--pri)}header a{color:var(--mut);cursor:pointer;font-size:14px;padding:4px 6px}header a.on{color:var(--pri);font-weight:600}
+main{max-width:900px;margin:0 auto;padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px}
+h1,h2,h3{margin:0 0 10px}.mut{color:var(--mut);font-size:14px}
+input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--txt);font-size:15px;margin:4px 0 12px}
+button{background:var(--pri);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-size:15px;cursor:pointer;width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0 12px}
+.auth{max-width:380px;margin:40px auto;text-align:center}.auth form{text-align:left}
+.tag{display:inline-block;padding:3px 12px;border-radius:99px;font-weight:700;color:#fff}.FRAUD{background:var(--red)}.SUSPICIOUS{background:var(--amb);color:#000}.LEGIT{background:var(--grn)}
+.bar{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px}.bar i{display:block;height:12px;border-radius:6px;background:var(--pri)}.bar span:first-child{width:92px}
+.hrs{display:flex;align-items:flex-end;gap:2px;height:90px}.hrs div{flex:1;background:var(--red);border-radius:3px 3px 0 0}
+.ov{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.msg{color:var(--red);font-size:14px;margin-bottom:8px}.stat{font-size:26px;font-weight:700}
+
+body{background:radial-gradient(1200px 500px at 80% -10%,rgba(99,102,241,.18),transparent),var(--bg)}
+header{position:sticky;top:0;z-index:5;backdrop-filter:blur(10px)}
+.logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#8b5cf6);display:inline-grid;place-items:center;color:#fff;font-size:16px;margin-right:6px}
+button{background:linear-gradient(135deg,#2563eb,#6366f1);font-weight:600;box-shadow:0 6px 16px rgba(37,99,235,.28)}
+.split{display:grid;grid-template-columns:1.1fr 1fr;min-height:calc(100vh - 120px);max-width:980px;margin:20px auto;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.side{padding:40px;color:#fff;background:linear-gradient(145deg,#1d4ed8,#7c3aed);display:flex;flex-direction:column;justify-content:center;gap:14px}
+.side h1{font-size:28px;line-height:1.2}.side p{opacity:.9}.side li{margin:6px 0;opacity:.95}
+.form{padding:36px 30px;display:flex;flex-direction:column;justify-content:center}.form h1{color:var(--pri)}
+.form a{color:var(--pri);cursor:pointer;font-weight:600}.form label{font-size:13px;color:var(--mut)}
+@media(max-width:720px){.split{grid-template-columns:1fr;min-height:0}.side{display:none}.form{padding:26px 20px}}
+.hero{padding:34px 22px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#1d4ed8,#7c3aed);margin-bottom:16px}
+.hero h1{font-size:30px;line-height:1.2;margin-bottom:8px}.hero p{opacity:.92;max-width:640px}
+.hero button{width:auto;background:#fff;color:#1d4ed8;margin:6px 8px 0 0;box-shadow:none}.hero button.g{background:rgba(255,255,255,.18);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{padding:6px 14px;border-radius:99px;background:var(--bg);border:1px solid var(--line);font-size:13px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.step{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg)}
+.step b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--pri);color:#fff;font-size:13px;margin-right:8px}
+.step p{margin:6px 0 0;color:var(--mut);font-size:13px}ul.t{padding-left:18px;margin:0}ul.t li{margin:5px 0}
+.foot{text-align:center;color:var(--mut);font-size:12px;padding:20px 0}
+</style></head><body>
+<header id="hd"></header><main id="app"></main>
+<script>
+const W={"num":["amount","hour","txn_count_5min","distance_from_home_km","device_new","foreign_ip","account_age_days","failed_logins_24h"],"mean":[83.8319,13.3454,0.4177,8.5149,0.0777,0.0507,1511.3711,0.1245],"std":[98.9884,5.5487,0.6608,10.5152,0.2678,0.2195,847.0481,0.3999],"cats":{"merchant_category":["crypto","electronics","food","gaming","grocery","travel","utilities"],"payment_method":["card","netbanking","upi","wallet"]},"coef":[0.331,-1.089,0.944,0.936,0.694,0.068,-2.112,1.04,2.761,0.898,-0.443,0.289,-2.94,0.454,-4.605,-0.732,-3.098,-0.815,1.06],"b":-4.024,"metrics":{"Logistic Regression":{"accuracy":0.964,"precision":0.29,"recall":0.973,"f1":0.446,"roc_auc":0.993},"Decision Tree":{"accuracy":0.965,"precision":0.271,"recall":0.8,"f1":0.405,"roc_auc":0.893},"KNN":{"accuracy":0.992,"precision":0.667,"recall":0.88,"f1":0.759,"roc_auc":0.945},"Random Forest":{"accuracy":0.997,"precision":0.94,"recall":0.84,"f1":0.887,"roc_auc":0.999},"Gradient Boosting":{"accuracy":0.989,"precision":0.583,"recall":0.987,"f1":0.733,"roc_auc":0.997}},"hour":[31,39,25,40,26,34,5,5,6,7,5,9,7,4,3,7,3,5,3,5,10,7,6,8],"types":{"account_takeover":89,"identity_theft":86,"card_fraud":71,"phishing":54},"cat_rate":{"crypto":17.26,"electronics":4.36,"food":0.82,"gaming":4.18,"grocery":0.12,"travel":1.57,"utilities":0.13},"rows":20000};
+const $=s=>document.querySelector(s);
+const ls={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let user=null,uname='';try{user=sessionStorage.getItem('u');uname=sessionStorage.getItem('n')||''}catch(e){}
+let view=location.hash.slice(1)||'overview';
+const sig=z=>1/(1+Math.exp(-z));
+function score(r){let z=W.b,i=0;
+ W.num.forEach((k,j)=>{z+=W.coef[i++]*((+r[k]-W.mean[j])/W.std[j])});
+ for(const c in W.cats)W.cats[c].forEach(v=>{z+=W.coef[i++]*(r[c]===v?1:0)});
+ const p=sig(z);return{p:p,verdict:p>=.7?'FRAUD':p>=.35?'SUSPICIOUS':'LEGIT',type:ctype(r),why:why(r)}}
+function ctype(r){if(+r.failed_logins_24h>=3||(+r.device_new&&+r.failed_logins_24h>=2))return'account_takeover';
+ if(+r.account_age_days<30)return'identity_theft';if(r.payment_method==='upi'||r.payment_method==='wallet')return'phishing';return'card_fraud'}
+function why(r){const o=[];if(+r.amount>800)o.push('Unusually high amount');if(+r.txn_count_5min>=3)o.push('High transaction velocity (5 min)');
+ if(+r.distance_from_home_km>200)o.push('Far from usual location');if(+r.device_new)o.push('New or unrecognised device');if(+r.foreign_ip)o.push('Foreign IP address');
+ if(+r.failed_logins_24h>=3)o.push('Multiple failed logins');if(+r.account_age_days<30)o.push('Very new account');if(+r.hour<6)o.push('Odd-hour activity');
+ if(r.merchant_category==='crypto')o.push('High-risk merchant (crypto)');return o.length?o:['No strong risk indicators']}
+function nav(){const h=$('#hd');h.innerHTML='<span class="logo">🛡</span><b>CyberShield</b>'+(user?[['overview','Overview'],['dashboard','Dashboard'],['check','Detect'],['batch','Batch']].map(([a,b])=>`<a class="${view===a?'on':''}" onclick="go('${a}')">${b}</a>`).join('')+`<a onclick="logout()">Logout (${(uname||user).split(' ')[0]})</a>`:'')}
+function go(v){view=v;location.hash=v;render()}
+function logout(){user=null;uname='';try{sessionStorage.removeItem('u');sessionStorage.removeItem('n')}catch(e){}view='login';render()}
+function authView(reg){return`<div class="split"><div class="side"><h1>Cybercrime Pattern Analysis &amp; Online Fraud Detection</h1><p>Python and machine learning to detect, analyse and prevent online fraud.</p>
+<ul><li>Hybrid detection: supervised + anomaly tier</li><li>Imbalance handled with SMOTE-Tomek</li><li>Explainable risk drivers for every alert</li></ul></div>
+<div class="form"><h1>${reg?'Create your account':'Welcome back'}</h1><p class="mut">${reg?'Sign up to access the fraud detection system.':'Sign in to continue.'}</p>
+<form onsubmit="return auth(event,${reg})">${reg?'<label>Full Name</label><input id="nm" placeholder="Your full name" required>':''}
+<label>Email Address</label><input id="em" type="email" placeholder="you@example.com" required>
+<label>${reg?'Set Password':'Password'}</label><input id="pw" type="password" placeholder="Minimum 6 characters" minlength="6" required>
+${reg?'<label>Confirm Password</label><input id="pw2" type="password" placeholder="Re-enter password" minlength="6" required>':''}
+<div class="msg" id="er"></div><button>${reg?'Create Account':'Sign In'}</button></form>
+<p class="mut" style="margin-top:14px">${reg?'Already registered? <a onclick="go(\'login\')">Sign in</a>':'New user? <a onclick="go(\'register\')">Create an account</a>'}</p>
+${reg?'':'<p class="mut">Demo login: admin@demo.com / admin123</p>'}</div></div>`}
+async function hash(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return btoa(s)}}
+async function auth(e,reg){e.preventDefault();const em=$('#em').value.trim().toLowerCase(),h=await hash($('#pw').value);let nm='';
+ const users=ls.get('users')||{};if(!users['admin@demo.com'])users['admin@demo.com']={name:'Admin',h:await hash('admin123')};
+ const u=users[em];const uh=u&&(typeof u==='string'?u:u.h);
+ if(reg){nm=$('#nm').value.trim();if(!nm){$('#er').textContent='Please enter your full name';return false}
+  if($('#pw').value!==$('#pw2').value){$('#er').textContent='Passwords do not match';return false}
+  if(u){$('#er').textContent='This email is already registered';return false}
+  users[em]={name:nm,h:h};ls.set('users',users)}
+ else{if(!u||uh!==h){$('#er').textContent='Invalid email or password';return false}nm=(u&&u.name)||em.split('@')[0]}
+ user=em;uname=nm;try{sessionStorage.setItem('u',em);sessionStorage.setItem('n',nm)}catch(x){}go('overview');return false}
+function overview(){const li=a=>'<ul class="t">'+a.map(x=>`<li>${x}</li>`).join('')+'</ul>';
+ const steps=[['Ingest','Streams transactions, user logs and device data via Kafka or REST APIs.'],['Clean &amp; balance','pandas and NumPy cleaning, then SMOTE-Tomek to fix the extreme class imbalance.'],['Feature engineering','Rolling 5-minute velocity, spatial-temporal shifts and behaviour markers.'],['Hybrid detection','Isolation Forest finds zero-day anomalies; XGBoost/LightGBM scores known fraud.'],['Explain','SHAP attributions show the exact risk drivers behind each flag.'],['Serve','FastAPI endpoint for real-time scoring, with drift monitoring.']];
+ return`<div class="hero"><h1>Hi ${(uname||'there').split(' ')[0]}, welcome to CyberShield</h1><p>Cybercrime Pattern Analysis and Online Fraud Detection using Python. An automated machine learning system that spots suspicious transactions and cybercrime patterns in real time.</p>
+ <button onclick="go('check')">Try the detector</button><button class="g" onclick="go('dashboard')">View dashboard</button></div>
+ <div class="grid"><div class="card"><div class="mut">Fraud recall</div><div class="stat">92%+</div></div><div class="card"><div class="mut">ROC-AUC</div><div class="stat">0.95–0.98</div></div><div class="card"><div class="mut">Scoring latency</div><div class="stat">&lt;100 ms</div></div></div>
+ <div class="card"><h2>About the project</h2><p class="mut" style="font-size:15px">Rule-based security systems struggle with fast-changing online fraud such as identity theft, card fraud and account takeover. This project analyses historical transaction data with Python, balances the rare fraud class, and trains several models. Ensemble models such as XGBoost and Random Forest perform best, flagging anomalous patterns with fewer false positives.</p></div>
+ <div class="card"><h2>Objectives</h2>${li(['Analyse cybercrime patterns using Python','Detect and predict online fraud with machine learning','Identify suspicious transactions and unusual patterns','Classify different types of cybercrime','Visualise cybercrime trends with graphs and charts','Improve fraud detection accuracy and online security'])}</div>
+ <div class="card"><h2>How it works</h2><div class="steps">${steps.map((x,i)=>`<div class="step"><b>${i+1}</b><strong>${x[0]}</strong><p>${x[1]}</p></div>`).join('')}</div></div>
+ <div class="card"><h2>Modules</h2>${li(['Data Ingestion &amp; Stream Collection','Preprocessing &amp; Resampling','Feature Extraction &amp; Engineering','Hybrid Detection Engine','Explainability &amp; Real-Time Deployment'])}</div>
+ <div class="card"><h2>Technology stack</h2><div class="chips">${['Python','Pandas','NumPy','Scikit-learn','XGBoost','imbalanced-learn','SHAP','Flask / FastAPI','SQLite / MySQL','Matplotlib','VS Code'].map(x=>`<span class="chip">${x}</span>`).join('')}</div></div>
+ <div class="card"><h2>Future enhancements</h2>${li(['Graph Neural Networks to detect coordinated fraud rings','Federated learning across institutions without sharing data','GANs to simulate zero-day attacks for stress testing','Counterfactual explanations and CI/CD with drift monitoring'])}</div>
+ <div class="foot">Submitted by Sri S (730924201101) · B.Tech AI &amp; Data Science · Guide: Ms. M. Manjuvidhya · Excel Engineering College, Komarapalayam</div>`}
+function dash(){const m=W.metrics,mx=Math.max(...W.hour),tot=Object.values(W.types).reduce((a,b)=>a+b,0);
+ return`<h1>Dashboard</h1><div class="grid"><div class="card"><div class="mut">Transactions analysed</div><div class="stat">${W.rows.toLocaleString()}</div></div>
+<div class="card"><div class="mut">Fraud cases</div><div class="stat">${tot}</div></div><div class="card"><div class="mut">Fraud rate</div><div class="stat">${(tot/W.rows*100).toFixed(2)}%</div></div></div>
+<div class="card"><h3>Model comparison</h3><div class="ov"><table><tr><th>Model</th><th>Acc</th><th>Prec</th><th>Recall</th><th>F1</th><th>AUC</th></tr>
+${Object.entries(m).map(([k,v])=>`<tr><td>${k}</td><td>${v.accuracy}</td><td>${v.precision}</td><td>${v.recall}</td><td>${v.f1}</td><td>${v.roc_auc}</td></tr>`).join('')}</table></div>
+<p class="mut">Live scoring on this page uses the trained Logistic Regression weights (highest recall).</p></div>
+<div class="card"><h3>Fraud by hour of day</h3><div class="hrs">${W.hour.map(v=>`<div style="height:${v/mx*100}%" title="${v}"></div>`).join('')}</div><div class="mut">0h → 23h</div></div>
+<div class="card"><h3>Fraud rate by merchant category (%)</h3>${Object.entries(W.cat_rate).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="bar"><span>${k}</span><i style="width:${v*4}%"></i><span>${v}</span></div>`).join('')}</div>
+<div class="card"><h3>Cybercrime types</h3>${Object.entries(W.types).map(([k,v])=>`<div class="bar"><span>${k}</span><i style="width:${v/tot*100*2}%"></i><span>${v}</span></div>`).join('')}</div>`}
+function fld(id,l,t,v,ex=''){return`<div><label class="mut">${l}</label><input id="${id}" type="${t}" value="${v}" ${ex}></div>`}
+function sel(id,l,opts){return`<div><label class="mut">${l}</label><select id="${id}">${opts.map(o=>Array.isArray(o)?`<option value="${o[0]}">${o[1]}</option>`:`<option>${o}</option>`).join('')}</select></div>`}
+function check(){return`<h1>Check a Transaction</h1><div class="card"><div class="grid">
+${fld('amount','Amount','number',120)}${fld('hour','Hour (0–23)','number',14,'min=0 max=23')}${fld('txn_count_5min','Transactions in 5 min','number',0)}
+${fld('distance_from_home_km','Distance from home (km)','number',5)}${sel('device_new','New device?',[[0,'No'],[1,'Yes']])}${sel('foreign_ip','Foreign IP?',[[0,'No'],[1,'Yes']])}
+${fld('account_age_days','Account age (days)','number',800)}${fld('failed_logins_24h','Failed logins (24h)','number',0)}
+${sel('merchant_category','Merchant',W.cats.merchant_category)}${sel('payment_method','Payment',W.cats.payment_method)}</div>
+<button onclick="runCheck()">Analyze</button></div><div id="res"></div>`}
+function runCheck(){const r={};[...W.num,'merchant_category','payment_method'].forEach(k=>r[k]=document.getElementById(k).value);
+ const s=score(r);$('#res').innerHTML=`<div class="card"><h2><span class="tag ${s.verdict}">${s.verdict}</span> &nbsp;Risk ${(s.p*100).toFixed(1)}%</h2>
+<p>Predicted crime type: <b>${s.verdict==='LEGIT'?'none':s.type}</b></p><b>Risk drivers</b><ul>${s.why.map(x=>`<li>${x}</li>`).join('')}</ul></div>`}
+function batch(){return`<h1>Batch Scoring</h1><div class="card"><p class="mut">Upload a CSV with columns: ${W.num.join(', ')}, merchant_category, payment_method.</p>
+<input type="file" id="f" accept=".csv"><button onclick="runBatch()">Score file</button></div><div id="bres"></div>`}
+function runBatch(){const f=$('#f').files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{
+ const L=rd.result.trim().split(/\r?\n/),H=L[0].split(',').map(x=>x.trim()),rows=[];
+ for(let i=1;i<L.length&&i<=20000;i++){const c=L[i].split(','),r={};H.forEach((h,j)=>r[h]=c[j]);if(W.num.every(k=>r[k]!==undefined&&r[k]!==''))rows.push({...r,...(s=>({p:s.p,v:s.verdict}))(score(r))})}
+ const cnt={FRAUD:0,SUSPICIOUS:0,LEGIT:0};rows.forEach(r=>cnt[r.v]++);rows.sort((a,b)=>b.p-a.p);
+ $('#bres').innerHTML=`<div class="card"><h3>Summary (${rows.length} rows)</h3>${Object.entries(cnt).map(([k,v])=>`<span class="tag ${k}">${k}: ${v}</span> `).join('')}
+ <h3 style="margin-top:14px">Top 15 riskiest</h3><div class="ov"><table><tr><th>Amount</th><th>Hour</th><th>Merchant</th><th>Risk %</th><th>Verdict</th></tr>
+ ${rows.slice(0,15).map(r=>`<tr><td>${r.amount}</td><td>${r.hour}</td><td>${r.merchant_category}</td><td>${(r.p*100).toFixed(1)}</td><td><span class="tag ${r.v}">${r.v}</span></td></tr>`).join('')}</table></div></div>`};rd.readAsText(f)}
+function render(){if(!user&&view!=='register')view='login';if(user&&(view==='login'||view==='register'))view='overview';nav();
+ $('#app').innerHTML=view==='register'?authView(1):view==='login'?authView(0):view==='check'?check():view==='batch'?batch():view==='dashboard'?dash():overview()}
+window.addEventListener('hashchange',()=>{const v=location.hash.slice(1);if(v&&v!==view){view=v;render()}});render();
+</script></body></html>
